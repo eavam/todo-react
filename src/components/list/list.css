@@ -1,0 +1,84 @@
+.listItems {
+  list-style: none;
+  padding: 0;
+  margin: 1.6rem 0 0;
+}
+
+.listItem {
+  padding: 1.2rem;
+  padding-left: 3rem;
+  font-size: 3.4rem;
+  text-align: left;
+  display: flex;
+  user-select: none;
+  position: relative;
+}
+
+.listItem:hover .hoverVisible,
+.listItem:focus .hoverVisible {
+  visibility: visible;
+  opacity: 1;
+}
+
+
+.listItemText {
+  flex: 1;
+  margin-right: 1.4rem;
+}
+
+.listItemLabel {
+  cursor: pointer;
+}
+
+.listItemInformation {
+  font-size: 2rem;
+}
+
+.listItemDescription {
+  margin: 2rem 0;
+}
+
+
+.listItemImportant {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2rem;
+  bottom: 0;
+}
+
+.listItemWrapper {
+  border: 2px solid #d9d9d9;
+  border-bottom: 0;
+  overflow: hidden;
+}
+
+.listItemWrapper:first-child {
+  border-radius: 7px 7px 0 0;
+}
+
+.listItemWrapper:last-child {
+  border-radius: 0 0 7px 7px;
+  border-bottom: 2px solid #d9d9d9;
+}
+
+.iconBtn {
+  border: 0;
+  background: none;
+  margin-right: 1.4rem;
+  cursor: pointer;
+  outline: none;
+}
+
+.iconBtn:last-child {
+  margin-right: 0;
+}
+
+.iconBtn svg {
+  width: 36px;
+  height: 36px;
+}
+
+.iconAdd {
+  transform: rotateZ(45deg)
+}
