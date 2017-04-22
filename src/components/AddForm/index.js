@@ -1,5 +1,5 @@
-import React from 'react';
-import './form.css';
+import React from 'react'
+import './form.css'
 
 
 const taskImportants = [
@@ -46,8 +46,7 @@ const AddForm = ({ addListItem, saveItem, closeForm, setValue, newItem, type }) 
           <div className="columsGroup">
             <div className="columnTitle">Важность задачи</div>
             <div className="importantsGroupWrapper">
-              {
-                taskImportants.map((taskImpotantItem, i) =>
+              { taskImportants.map((taskImpotantItem, i) =>
                   <label key={i}>
                     <input
                       type="radio"
@@ -74,8 +73,8 @@ const AddForm = ({ addListItem, saveItem, closeForm, setValue, newItem, type }) 
         </button>
       </div>
     </form>
-  );
-};
+  )
+}
 
-export default AddForm;
+export default AddForm
 

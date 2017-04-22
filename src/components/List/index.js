@@ -1,6 +1,6 @@
-import React from 'react';
-import './list.css';
-import fire from './fire.png';
+import React from 'react'
+import './list.css'
+import fire from './fire.png'
 
 const stylesText = {
   color: '#d9d9d9',
@@ -20,14 +20,14 @@ const styleInformation = {
   display: 'none'
 }
 
-const now = new Date().valueOf();
+const now = new Date().valueOf()
 
 const List = ({ listItems, removeItem, checkSuccess, viewInformation, editItem, filter }) => {
   return (
     <ul className="listItems">
       { 
         listItems.map((item, i) => {
-          if( filter.length !== 0 && !filter.includes(item.important) ) return false;
+          if( filter.length !== 0 && !filter.includes(item.important) ) return false
           return (
             <li key={i} className="listItemWrapper" style={ item.timestamp < now && !item.success ? styleFire : {} }>
               <div className="listItem">
@@ -90,7 +90,7 @@ const List = ({ listItems, removeItem, checkSuccess, viewInformation, editItem, 
         })
       }
     </ul>
-  );
-};
+  )
+}
 
-export default List;
+export default List

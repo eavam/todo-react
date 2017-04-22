@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import moment from 'moment';
-import List from './components/list/List';
-import AddForm from './components/form/AddForm'
-import Filter from './components/filter/Filter'
+import React, { Component } from 'react'
+import moment from 'moment'
+import List from './components/List'
+import AddForm from './components/AddForm'
+import Filter from './components/Filter'
 
-import './App.css';
+import './App.css'
 
 
 const defaultState = [
@@ -54,35 +54,35 @@ class App extends Component {
     }
 
     this.setValue = (e, type) => {
-      const { newItem } = this.state;
-      const val = e.target.value;
+      const { newItem } = this.state
+      const val = e.target.value
 
       switch (type) {
 
-        case 'label':
-          newItem.label = val;
-          break;
+      case 'label':
+        newItem.label = val
+        break
 
-        case 'description':
-          newItem.description = val;
-          break;
+      case 'description':
+        newItem.description = val
+        break
 
-        case 'important':
-          newItem.important = val;
-          break;
+      case 'important':
+        newItem.important = val
+        break
 
-        case 'date':
-          newItem.date = val;
-          this.setTimestamp();
-          break;
+      case 'date':
+        newItem.date = val
+        this.setTimestamp()
+        break
 
-        case 'time':
-          newItem.time = val;
-          this.setTimestamp();
-          break;
+      case 'time':
+        newItem.time = val
+        this.setTimestamp()
+        break
       
-        default:
-          break;
+      default:
+        break
       }
 
       this.setState({newItem})
@@ -91,18 +91,18 @@ class App extends Component {
     this.setTimestamp = () => {
       const { newItem } = this.state
       const date = `${newItem.date} ${newItem.time}`
-      newItem.timestamp = new Date(date);
+      newItem.timestamp = new Date(date)
       this.setState({newItem})
     }
 
     this.viewInformation = (e, id) => {
-      const { stateList } = this.state;
-      stateList[id].viewInformation = !stateList[id].viewInformation;
+      const { stateList } = this.state
+      stateList[id].viewInformation = !stateList[id].viewInformation
       this.setState({stateList})
     }
 
     this.addListItem = e => {
-      e.preventDefault();
+      e.preventDefault()
 
       const { stateList } = this.state
       stateList.push({...this.state.newItem})
@@ -112,30 +112,30 @@ class App extends Component {
         newItem: {...defaultItem},
       })
 
-      this.togglePopupForm();
+      this.togglePopupForm()
 
     }
 
     this.closeForm = () => {
-      this.togglePopupForm();
+      this.togglePopupForm()
     }
 
     this.saveItem = e => {
-      e.preventDefault();
+      e.preventDefault()
       this.setState({ newItem: {...defaultItem} })
-      this.togglePopupForm();
+      this.togglePopupForm()
     }
 
     this.removeItem = (e, id) => {
-      const state = this.state.stateList;
+      const state = this.state.stateList
       state.splice( id, 1 )
       this.setState({ stateList: state })
     }
 
     this.checkSuccess = (e, id) => {
-      const { stateList } = this.state;
+      const { stateList } = this.state
 
-      stateList[id].success = !stateList[id].success;
+      stateList[id].success = !stateList[id].success
 
       if( stateList[id].success ) stateList[id].timeEnd = moment().format('YYYY-MM-DD HH:mm')
       else stateList[id].timeEnd = ''
@@ -147,17 +147,17 @@ class App extends Component {
       this.setState({
         typeForm: type,
         popUpAddItem: !this.state.popUpAddItem
-      });
+      })
     }
 
     this.addItem = () => {
-      this.setState({ newItem: {...defaultItem} });
+      this.setState({ newItem: {...defaultItem} })
       this.togglePopupForm('add')
     }
 
     this.editItem = (e, id) => {
-      const { stateList } = this.state;
-      this.setState({ newItem: stateList[id] });
+      const { stateList } = this.state
+      this.setState({ newItem: stateList[id] })
       this.togglePopupForm('edit')
     }
 
@@ -166,43 +166,41 @@ class App extends Component {
     }
 
     this.setFilter = e => {
-      const { filter } = this.state;
+      const { filter } = this.state
       const indexElement = filter.indexOf(e.target.value)
 
       if( indexElement !== -1 ) filter.splice(indexElement, 1)
       else filter.push(e.target.value)
 
-      this.setState(filter);
+      this.setState(filter)
 
-      if( !filter.length ) this.setFilterAll();
-      else this.setState({filterAll: false});
+      if( !filter.length ) this.setFilterAll()
+      else this.setState({filterAll: false})
     }
 
     this.setFilterAll = () => {
-      let { filterAll, filter } = this.state;
+      let { filterAll, filter } = this.state
       
-      if( filterAll && !filter.length ) return;
+      if( filterAll && !filter.length ) return
 
       if( !filterAll ) {
-        this.setState({ filterAll: true, filter: [] });
+        this.setState({ filterAll: true, filter: [] })
       } else {
-        this.setState({ filterAll: false });
+        this.setState({ filterAll: false })
       }
     }
 
   }
 
   componentDidUpdate() {
-    this.saveToLocal();
+    this.saveToLocal()
   }
 
   render() {
     return (
       <div>
-        { 
-            this.state.popUpAddItem
-          ?
-            <AddForm 
+        { this.state.popUpAddItem
+          && <AddForm 
               addListItem={this.addListItem}
               closeForm={this.closeForm}
               saveItem={this.saveItem}
@@ -210,8 +208,6 @@ class App extends Component {
               newItem={this.state.newItem}
               type={this.state.typeForm}
             />
-          :
-            null
         }
         <div className="main">
           <h1>TODO List</h1>
@@ -222,9 +218,8 @@ class App extends Component {
             setFilterAll={this.setFilterAll}
             filterAll={this.state.filterAll}
           />
-          { this.state.stateList.length
-            ?
-              <List 
+          { this.state.stateList.length !== 0
+            && <List 
                 filter={this.state.filter}
                 listItems={this.state.stateList}
                 removeItem={this.removeItem}
@@ -232,13 +227,11 @@ class App extends Component {
                 viewInformation={this.viewInformation}
                 editItem={this.editItem}
               />
-            :
-              null
           }
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

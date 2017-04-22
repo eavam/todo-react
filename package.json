@@ -4,6 +4,8 @@
   "private": true,
   "homepage": "https://egorava.github.io/todo-react/build",
   "devDependencies": {
+    "eslint": "^3.19.0",
+    "eslint-plugin-react": "^6.10.3",
     "react-scripts": "0.8.5"
   },
   "dependencies": {
@@ -16,5 +18,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/egorAva/todo-react.git",
+  "author": "Egor Avakumov <avakymov21@gmail.com>",
+  "license": "MIT"
 }
