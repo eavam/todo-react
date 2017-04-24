@@ -1,0 +1,8 @@
+export const TOGGLE_POPUP = 'TOGGLE_POPUP'
+export const CHANGE_FORM_POPUP = 'CHANGE_FORM_POPUP'
+export const CHANGE_ITEMS = 'CHANGE_ITEMS'
+export const CHANGE_FORM_ITEM = 'CHANGE_FORM_ITEM'
+export const RESET_FORM_ITEM = 'RESET_FORM_ITEM'
+export const SAVE_ITEM = 'SAVE_ITEM'
+export const REMOVE_ITEM = 'REMOVE_ITEM'
+export const SET_FILTERS = 'SET_FILTERS'

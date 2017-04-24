@@ -7,3 +7,21 @@ body {
   padding: 0;
   font-family: 'Comfortaa', cursive;
 }
+
+.btn {
+  border: 0;
+  background: #27ca5a;
+  color: #fff;
+  font-size: 1.4rem;
+  padding: 1.2rem 1.5rem;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-top: 1.2rem;
+  align-self: flex-end;
+}
+
+.main {
+  max-width: 1200px;
+  text-align: center;
+  margin: 0 auto;
+}

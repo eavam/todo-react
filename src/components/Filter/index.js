@@ -1,5 +1,6 @@
-import React from 'react';
-import './filter.css';
+import React from 'react'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
 const checkboxFilter = [
   {
@@ -16,31 +17,91 @@ const checkboxFilter = [
   },
 ]
 
-const Filter = ({setFilter, setFilterAll, filters, filterAll}) => {
-  const classNamesFilterAll = `filterItem firstLetterBug ${filterAll ? 'active' : ''}`;
-  return (
-    <div className="filter">
-      Показать:
-      <div className="filterGroup">
+const Root = styled.div`
+  text-align: left;
+`
+const Group = styled.div`
+  margin-top: .7rem;
+  display: flex;
+  align-items: center;
+`
+const Lable = styled.div`
+  margin-right: 10px
+`
+const FilterItem = styled.label`
+  padding: .3rem 1rem;
+  border: 1px solid;
+  border-radius: 3px;
+  margin-right: .4rem;
+  cursor: pointer;
+  user-select: none;
+  color: ${props => props.active ? '#fff' : '#000'}
+`
+const AllFilter = styled(FilterItem)`
+  background: ${props => props.active ? '#000' : '#fff'};
 
-        <label className={classNamesFilterAll}>
+  &:first-letter {
+    display: inline-block;
+  }
+`
+const regularStyle = `
+  background: #009fff;
+  border-color: #009fff;
+`
+const importantStyle = `
+  background: #ffe100;
+  border-color: #ffe100;
+`
+const veryImportantStyle = `
+  background: #ff2500;
+  border-color: #ff2500;
+`
+const defaultStyle = `
+  background: #fff;
+  border-color: #000;
+`
+const FilterLabel = styled(FilterItem)`
+  ${props =>
+    props.theme === 'regular' && props.active
+    ? regularStyle
+    : props.theme === 'important' && props.active
+    ? importantStyle
+    : props.theme === 'veryImportant' && props.active
+    ? veryImportantStyle
+    : defaultStyle
+  }
+`
+const Input = styled.input`
+  display: none;
+`
+
+const Filter = ({filters, filterChange}) => {
+  const activeAll = filters.length === 0
+  return (
+    <Root>
+      <Group>
+        <Lable>Показать:</Lable>
+        <AllFilter active={activeAll} >
           Все
-          <input type="checkbox" value="all" onChange={setFilterAll} checked={filterAll} />
-        </label>
-        
-        {
-          checkboxFilter.map((item, index) => {
-            const filterClass = `filterItem ${item.value}-border ${filters.includes(item.value) ? `active ${item.value}` : ''}`;
-            return (
-            <label key={index} className={filterClass}>
+          <Input type="checkbox" value="all" onChange={filterChange} checked={activeAll} />
+        </AllFilter>
+        { checkboxFilter.map((item, index) => {
+          const active = filters.includes(item.value)
+          return (
+            <FilterLabel key={index} theme={item.value} active={active} >
               {item.label}
-              <input type="checkbox" value={item.value} onChange={setFilter} checked={filters.includes(item.value)} />
-            </label>)
-          })
+              <Input type="checkbox" value={item.value} onChange={filterChange} checked={active} />
+            </FilterLabel>)
+        })
         }
-      </div>
-    </div>
+      </Group>
+    </Root>
   )
 }
 
-export default Filter;
+Filter.propTypes = {
+  filterChange: PropTypes.func,
+  filters: PropTypes.array,
+}
+
+export default Filter
