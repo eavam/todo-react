@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import styled from 'styled-components'
 
 const Svg = styled.svg`
-  ${props => props.success && 'fill: #22c522'}
+  ${props => props.success && 'fill: #22c522;'}
 `
 
 const SuccessIcon = ({ success }) => {

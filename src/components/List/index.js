@@ -99,7 +99,7 @@ const ItemLabel = styled.div`
 `
 const ItemInfo = styled.div`
   font-size: 2rem;
-  ${props => !props.view && 'display: none'}
+  ${props => !props.view && 'display: none;'}
 `
 const ItemDescription = styled.div`
   margin: 2rem 0;
