@@ -66,8 +66,7 @@ const LeftBorder = styled.span`
   ? importantStyle
   : props.theme === 'veryImportant'
   ? veryImportantStyle
-  : ''
-  }
+  : ''}
 `
 const Icon = styled.div`
   border: 0;
@@ -94,8 +93,7 @@ const ItemLabel = styled.div`
   ${props => props.success && `
     color: #d9d9d9;
     text-decoration: line-through;
-    `
-  }
+    `}
 `
 const ItemInfo = styled.div`
   font-size: 2rem;
@@ -105,9 +103,8 @@ const ItemDescription = styled.div`
   margin: 2rem 0;
 `
 const IconHidden = styled(Icon)`
-    visibility: hidden;
-    opacity: 0;
-  }
+  visibility: hidden;
+  opacity: 0;
 `
 
 const now = new Date().valueOf()
