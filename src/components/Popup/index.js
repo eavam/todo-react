@@ -1,87 +1,86 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import styled from 'styled-components'
+import React from 'react';
+import PropTypes from 'prop-types';
+import styled from 'styled-components';
 
 const taskImportants = [
   {
     label: 'Обычная',
-    value: 'regular'
+    value: 'regular',
   },
   {
     label: 'Важная',
-    value: 'important'
+    value: 'important',
   },
   {
     label: 'Очень важная',
-    value: 'veryImportant'
-  }
-]
+    value: 'veryImportant',
+  },
+];
 
-const AddForm = ({ saveItem, formItem, changeFormPopup, togglePopup }) => {
-  return (
-    <Root onSubmit={saveItem}>
-      <Item>
+const AddForm = ({
+  saveItem, formItem, changeFormPopup, togglePopup,
+}) => (
+  <Root onSubmit={saveItem}>
+    <Item>
 
-        <Close onClick={togglePopup}>
-          <svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 42 42'><path fill='#ffffff' d='M42 20H22V0h-2v20H0v2h20v20h2V22h20z'/></svg>
-        </Close>
+      <Close onClick={togglePopup}>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 42 42"><path fill="#ffffff" d="M42 20H22V0h-2v20H0v2h20v20h2V22h20z" /></svg>
+      </Close>
 
-        <Title
-          onChange={changeFormPopup}
-          value={formItem.label}
-          name='label'
-          placeholder='Заголовок'
-          required
-        />
+      <Title
+        onChange={changeFormPopup}
+        value={formItem.label}
+        name="label"
+        placeholder="Заголовок"
+        required
+      />
 
-        <Description
-          onChange={changeFormPopup}
-          value={formItem.description}
-          name='description'
-          placeholder='Описание'
-          required
-        />
+      <Description
+        onChange={changeFormPopup}
+        value={formItem.description}
+        name="description"
+        placeholder="Описание"
+        required
+      />
 
-        <Columns>
-          <GroupColumns>
-            <ColumnTitle>Важность задачи</ColumnTitle>
-            <Importants>
-              { taskImportants.map((taskImpotantItem, i) =>
-                  <ImportantsLabel key={i}>
-                    <ImportantsImput
-                      onChange={changeFormPopup}
-                      value={taskImpotantItem.value}
-                      checked={taskImpotantItem.value === formItem.important}
-                      name='important'
-                      type='radio'
-                    />
-                    <ImportantsColor theme={taskImpotantItem.value} active={taskImpotantItem.value === formItem.important} />
-                    {taskImpotantItem.label}
-                  </ImportantsLabel>
-                )
+      <Columns>
+        <GroupColumns>
+          <ColumnTitle>Важность задачи</ColumnTitle>
+          <Importants>
+            { taskImportants.map((taskImpotantItem, i) =>
+                (<ImportantsLabel key={i}>
+                  <ImportantsImput
+                    onChange={changeFormPopup}
+                    value={taskImpotantItem.value}
+                    checked={taskImpotantItem.value === formItem.important}
+                    name="important"
+                    type="radio"
+                  />
+                  <ImportantsColor theme={taskImpotantItem.value} active={taskImpotantItem.value === formItem.important} />
+                  {taskImpotantItem.label}
+                 </ImportantsLabel>))
               }
-            </Importants>
-          </GroupColumns>
-          <GroupColumns>
-            <ColumnTitle>Дата и время выполнения</ColumnTitle>
-            <input type='date' name='date' onChange={changeFormPopup} value={formItem.date}/>
-            <input type='time' name='time' onChange={changeFormPopup} value={formItem.time}/>
-          </GroupColumns>
-        </Columns>
-        <button className='btn'>Сохранить</button>
-      </Item>
-    </Root>
-  )
-}
+          </Importants>
+        </GroupColumns>
+        <GroupColumns>
+          <ColumnTitle>Дата и время выполнения</ColumnTitle>
+          <input type="date" name="date" onChange={changeFormPopup} value={formItem.date} />
+          <input type="time" name="time" onChange={changeFormPopup} value={formItem.time} />
+        </GroupColumns>
+      </Columns>
+      <button className="btn">Сохранить</button>
+    </Item>
+  </Root>
+);
 
 AddForm.propTypes = {
   changeFormPopup: PropTypes.func,
   formItem: PropTypes.object,
   togglePopup: PropTypes.func,
   saveItem: PropTypes.func,
-}
+};
 
-export default AddForm
+export default AddForm;
 
 const Root = styled.form`
   position: fixed;
@@ -96,7 +95,7 @@ const Root = styled.form`
   bottom: 0;
   z-index: 10;
   padding: 3rem 0;
-`
+`;
 const Item = styled.div`
   position: relative;
   width: 750px;
@@ -106,7 +105,7 @@ const Item = styled.div`
   @media (max-width: 750px) {
     width: 100%;
   }
-`
+`;
 const Text = styled.textarea`
   border: 0;
   outline: none;
@@ -115,14 +114,14 @@ const Text = styled.textarea`
   resize: none;
   box-shadow: inset 0px -2px 0 rgba(0,0,0,.15);
   font-family: 'Comfortaa', cursive;
-`
+`;
 const Title = styled(Text)`
   border-radius: 3px 3px 0 0;
   min-height: 3em;
-`
+`;
 const Description = styled(Text)`
   min-height: 8em;
-`
+`;
 const Close = styled.div`
   position: absolute;
   right: 0;
@@ -136,10 +135,10 @@ const Close = styled.div`
     height: 100%;
     transform: rotateZ(45deg);
   }
-`
+`;
 const Columns = styled.div`
   display: flex;
-`
+`;
 const GroupColumns = styled.div`
   width: 50%;
   background: #fff;
@@ -154,45 +153,45 @@ const GroupColumns = styled.div`
     box-shadow: inset 1px 0 0 rgba(0,0,0,.15);
     border-bottom-right-radius: 3px
   }
-`
+`;
 const ColumnTitle = styled.div`
   margin-bottom: .5rem;
-`
+`;
 const Importants = styled.div`
   display: flex;
   justify-content: space-between;
-`
+`;
 const ImportantsImput = styled.input`
   display: none;
-`
+`;
 const ImportantsLabel = styled.label`
   width: 33%;
   text-align: center;
   cursor: pointer;
-`
+`;
 const regularStyle = `
   background: #009fff;
-`
+`;
 const importantStyle = `
   background: #ffe100;
-`
+`;
 const veryImportantStyle = `
   background: #ff2500;
-`
+`;
 const ImportantsColor = styled.div`
   display: block;
   width: 100%;
   height: 2rem;
   border-radius: 3px;
   margin-bottom: .5rem;
-  opacity: ${props => props.active ? '1' : '.4'};
+  opacity: ${props => (props.active ? '1' : '.4')};
   ${props =>
-    props.theme === 'regular'
-    ? regularStyle
-    : props.theme === 'important'
-    ? importantStyle
-    : props.theme === 'veryImportant'
-    ? veryImportantStyle
-    : ''
-    }
-`
+    (props.theme === 'regular'
+      ? regularStyle
+      : props.theme === 'important'
+        ? importantStyle
+        : props.theme === 'veryImportant'
+          ? veryImportantStyle
+          : '')
+}
+`;

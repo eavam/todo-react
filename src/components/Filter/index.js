@@ -1,107 +1,118 @@
-import React from 'react'
-import styled from 'styled-components'
-import PropTypes from 'prop-types'
+import React from 'react';
+import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const checkboxFilter = [
   {
     value: 'regular',
-    label: 'Обычные'
+    label: 'Обычные',
   },
   {
     value: 'important',
-    label: 'Важные'
+    label: 'Важные',
   },
   {
     value: 'veryImportant',
-    label: 'Очень важные'
+    label: 'Очень важные',
   },
-]
+];
 
 const Root = styled.div`
   text-align: left;
-`
+`;
 const Group = styled.div`
-  margin-top: .7rem;
+  margin-top: 0.7rem;
   display: flex;
   align-items: center;
-`
+`;
 const Lable = styled.div`
-  margin-right: 10px
-`
+  margin-right: 10px;
+`;
 const FilterItem = styled.label`
-  padding: .3rem 1rem;
+  padding: 0.3rem 1rem;
   border: 1px solid;
   border-radius: 3px;
-  margin-right: .4rem;
+  margin-right: 0.4rem;
   cursor: pointer;
   user-select: none;
-  color: ${props => props.active ? '#fff' : '#000'}
-`
+  color: ${props => (props.active ? '#fff' : '#000')};
+`;
 const AllFilter = styled(FilterItem)`
-  background: ${props => props.active ? '#000' : '#fff'};
+  background: ${props => (props.active ? '#000' : '#fff')};
 
   &:first-letter {
     display: inline-block;
   }
-`
+`;
 const regularStyle = `
   background: #009fff;
   border-color: #009fff;
-`
+`;
 const importantStyle = `
   background: #ffe100;
   border-color: #ffe100;
-`
+`;
 const veryImportantStyle = `
   background: #ff2500;
   border-color: #ff2500;
-`
+`;
 const defaultStyle = `
   background: #fff;
   border-color: #000;
-`
-const FilterLabel = styled(FilterItem)`
-  ${props =>
-    props.theme === 'regular' && props.active
-    ? regularStyle
-    : props.theme === 'important' && props.active
-    ? importantStyle
-    : props.theme === 'veryImportant' && props.active
-    ? veryImportantStyle
-    : defaultStyle
+`;
+
+const selectTheme = (props) => {
+  if (!props.active) return defaultStyle;
+
+  switch (props.theme) {
+    case 'regular':
+      return regularStyle;
+
+    case 'important':
+      return importantStyle;
+
+    case 'veryImportant':
+      return veryImportantStyle;
+
+    default:
+      return defaultStyle;
   }
-`
+};
+
+const FilterLabel = styled(FilterItem)`
+  ${selectTheme};
+`;
 const Input = styled.input`
   display: none;
-`
+`;
 
-const Filter = ({filters, filterChange}) => {
-  const activeAll = filters.length === 0
+const Filter = ({ filters, filterChange }) => {
+  const activeAll = filters.length === 0;
   return (
     <Root>
       <Group>
         <Lable>Показать:</Lable>
-        <AllFilter active={activeAll} >
+        <AllFilter active={activeAll}>
           Все
           <Input type="checkbox" value="all" onChange={filterChange} checked={activeAll} />
         </AllFilter>
-        { checkboxFilter.map((item, index) => {
-          const active = filters.includes(item.value)
+        {checkboxFilter.map((item) => {
+          const active = filters.includes(item.value);
           return (
-            <FilterLabel key={index} theme={item.value} active={active} >
+            <FilterLabel key={item.value} theme={item.value} active={active}>
               {item.label}
               <Input type="checkbox" value={item.value} onChange={filterChange} checked={active} />
-            </FilterLabel>)
-        })
-        }
+            </FilterLabel>
+          );
+        })}
       </Group>
     </Root>
-  )
-}
+  );
+};
 
 Filter.propTypes = {
-  filterChange: PropTypes.func,
-  filters: PropTypes.array,
-}
+  filterChange: PropTypes.func.isRequired,
+  filters: PropTypes.array.isRequired,
+};
 
-export default Filter
+export default Filter;

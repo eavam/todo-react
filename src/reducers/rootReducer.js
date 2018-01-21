@@ -1,4 +1,4 @@
-import * as actionTypes from '../actionTypes'
+import * as actionTypes from '../actionTypes';
 
 const defaultItems = [
   {
@@ -10,7 +10,7 @@ const defaultItems = [
     important: 'regular',
     date: '2017-04-03',
     time: '',
-    dateEnd: ''
+    dateEnd: '',
   },
   {
     id: 1,
@@ -21,7 +21,7 @@ const defaultItems = [
     important: 'important',
     date: '2017-04-03',
     time: '',
-    dateEnd: ''
+    dateEnd: '',
   },
   {
     id: 2,
@@ -32,9 +32,9 @@ const defaultItems = [
     important: 'veryImportant',
     date: '2017-04-03',
     time: '',
-    dateEnd: ''
-  }
-]
+    dateEnd: '',
+  },
+];
 
 const defaultItem = {
   label: '',
@@ -45,69 +45,68 @@ const defaultItem = {
   dateEnd: '',
   success: false,
   viewInformation: false,
-}
+};
 
 const initialState = {
   items: [...defaultItems],
   openPopup: false,
-  formItem: {...defaultItem},
-  filters: []
-}
+  formItem: { ...defaultItem },
+  filters: [],
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
+    case actionTypes.TOGGLE_POPUP:
+      return {
+        ...state,
+        openPopup: !state.openPopup,
+      };
 
-  case actionTypes.TOGGLE_POPUP:
-    return {
-      ...state,
-      openPopup: !state.openPopup
-    }
-  
-  case actionTypes.CHANGE_FORM_POPUP:
-    return {
-      ...state,
-      formItem: {...state.formItem, ...action.formItem}
-    }
+    case actionTypes.CHANGE_FORM_POPUP:
+      return {
+        ...state,
+        formItem: { ...state.formItem, ...action.formItem },
+      };
 
-  case actionTypes.RESET_FORM_ITEM:
-    return {
-      ...state,
-      formItem: {...defaultItem}
-    }
+    case actionTypes.RESET_FORM_ITEM:
+      return {
+        ...state,
+        formItem: { ...defaultItem },
+      };
 
-  case actionTypes.SAVE_ITEM:
-    return {
-      ...state,
-      items: [
-        ...state.items,
-        { id: state.items.length, ...state.formItem }
-      ],
-      formItem: {...defaultItem},
-      openPopup: false
-    }
+    case actionTypes.SAVE_ITEM:
+      return {
+        ...state,
+        items: [
+          ...state.items,
+          { id: state.items.length, ...state.formItem },
+        ],
+        formItem: { ...defaultItem },
+        openPopup: false,
+      };
 
-  case actionTypes.CHANGE_ITEMS:
-    return {
-      ...state,
-      items: [...action.items],
-      openPopup: false
-    }
+    case actionTypes.CHANGE_ITEMS:
+      return {
+        ...state,
+        items: [...action.items],
+        openPopup: false,
+      };
 
-  case actionTypes.CHANGE_FORM_ITEM:
-    return {
-      ...state,
-      formItem: {...action.formItem}
-    }
+    case actionTypes.CHANGE_FORM_ITEM:
+      return {
+        ...state,
+        formItem: { ...action.formItem },
+      };
 
-  case actionTypes.SET_FILTERS:
-    return {
-      ...state,
-      filters: [...action.filters]
-    }
+    case actionTypes.SET_FILTERS:
+      return {
+        ...state,
+        filters: [...action.filters],
+      };
 
-  default:
-    return state
+    default:
+      return state;
   }
-}
+};
 
-export default reducer
+export default reducer;

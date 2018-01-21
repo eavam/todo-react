@@ -1,37 +1,36 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import List from '../List'
-import Popup from '../Popup'
-import Filter from '../Filter'
-import * as actions from './actions'
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import List from '../List';
+import Popup from '../Popup';
+import Filter from '../Filter';
+import * as actions from './actions';
 
 class Main extends Component {
-
   constructor(props) {
-    super(props)
-    this.changeFormPopup = this.changeFormPopup.bind(this)
+    super(props);
+    this.changeFormPopup = this.changeFormPopup.bind(this);
   }
 
   changeFormPopup(event) {
-    const target = event.target
-    const value = target.type === 'checkbox' ? target.checked : target.value
-    const name = target.name
+    const target = event.target;
+    const value = target.type === 'checkbox' ? target.checked : target.value;
+    const name = target.name;
     this.props.changeFormPopup({
-      [name]: value
-    })
+      [name]: value,
+    });
   }
 
   render() {
     return (
       <div>
         { this.props.openPopup
-          && <Popup 
-              togglePopup={this.props.togglePopup}
-              formItem={this.props.formItem}
-              saveItem={this.props.saveItem}
-              changeFormPopup={this.changeFormPopup}
-            />
+          && <Popup
+            togglePopup={this.props.togglePopup}
+            formItem={this.props.formItem}
+            saveItem={this.props.saveItem}
+            changeFormPopup={this.changeFormPopup}
+          />
         }
         <div className="main">
           <h1>TODO List on React</h1>
@@ -42,17 +41,17 @@ class Main extends Component {
           />
           { this.props.items.length !== 0
             && <List
-                filters={this.props.filters}
-                items={this.props.items}
-                toggleSuccessItem={this.props.toggleSuccessItem}
-                toggleViewItem={this.props.toggleViewItem}
-                editItem={this.props.editItem}
-                removeItem={this.props.removeItem}
-              />
+              filters={this.props.filters}
+              items={this.props.items}
+              toggleSuccessItem={this.props.toggleSuccessItem}
+              toggleViewItem={this.props.toggleViewItem}
+              editItem={this.props.editItem}
+              removeItem={this.props.removeItem}
+            />
           }
         </div>
       </div>
-    )
+    );
   }
 }
 
@@ -69,55 +68,57 @@ Main.propTypes = {
   removeItem: PropTypes.func,
   filterChange: PropTypes.func,
   filters: PropTypes.array,
-}
+};
 
 function mapStateToProps(state) {
-  const { openPopup, formItem, items, filters } = state
+  const {
+    openPopup, formItem, items, filters,
+  } = state;
   return {
     openPopup,
     formItem,
     items,
-    filters
-  }
+    filters,
+  };
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     togglePopup() {
-      dispatch(actions.togglePopup())
+      dispatch(actions.togglePopup());
     },
 
     changeFormPopup(formItem) {
-      dispatch(actions.changeFormPopup(formItem))
+      dispatch(actions.changeFormPopup(formItem));
     },
 
     saveItem(event) {
-      event.preventDefault()
-      dispatch(actions.saveItem())
+      event.preventDefault();
+      dispatch(actions.saveItem());
     },
 
     toggleSuccessItem(id) {
-      dispatch(actions.toggleSuccessItem(id))
+      dispatch(actions.toggleSuccessItem(id));
     },
 
     toggleViewItem(id) {
-      dispatch(actions.toggleViewItem(id))
+      dispatch(actions.toggleViewItem(id));
     },
 
     editItem(id) {
-      dispatch(actions.editItem(id))
-      dispatch(actions.togglePopup())
+      dispatch(actions.editItem(id));
+      dispatch(actions.togglePopup());
     },
 
     removeItem(id) {
-      dispatch(actions.removeItem(id))
+      dispatch(actions.removeItem(id));
     },
 
     filterChange(event) {
-      const val = event.target.value
-      dispatch(actions.filterChange(val))
-    }
-  }
+      const val = event.target.value;
+      dispatch(actions.filterChange(val));
+    },
+  };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main)
+export default connect(mapStateToProps, mapDispatchToProps)(Main);
